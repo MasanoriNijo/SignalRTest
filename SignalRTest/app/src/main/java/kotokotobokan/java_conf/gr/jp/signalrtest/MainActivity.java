@@ -146,13 +146,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (view.getId()){
 
             case R.id.button:{
-                sgr_.ConctOn();
+                this.StartService();
+//                sgr_.ConctOn();
                 break;
             }
             case R.id.button2:{
 
                 if(binder_!=null){
-                    binder_.initilal(1);
+//                    binder_.initilal(1);
+                    binder_.MsgSend("ABC_TEST");
                 }
 
 //                sgr_.MsgSend("TestMsg:"+txt2_.getText().toString());

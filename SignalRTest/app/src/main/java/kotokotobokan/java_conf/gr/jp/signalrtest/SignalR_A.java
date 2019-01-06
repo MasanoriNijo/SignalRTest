@@ -43,6 +43,7 @@ public  static String SGR_URL="http://192.168.11.2:5001/chatHub";
                 hubConnection.start().blockingAwait();
 
 
+
                 Log.d("xxx","xxx:ConctOn_2");
                 act_.txt1_.setText("ConctOn!");
             }catch (Error e){
