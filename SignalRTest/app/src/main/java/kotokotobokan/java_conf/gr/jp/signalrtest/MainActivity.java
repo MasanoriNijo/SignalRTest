@@ -162,15 +162,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
             case R.id.button3:{
 
+                binder_.NtfSend("ABCTEST");
                 //④GET リクエストサンプルとして「Livedoor天気情報」にアクセス
 //                String weatherURL = "192.168.11.10";
-                String weatherURL = "127.0.0.1";
-                HttpGet_A htga_=new HttpGet_A(this);
-                if(htga_.ChkConnect()){
+//                String weatherURL = "127.0.0.1";
+//                HttpGet_A htga_=new HttpGet_A(this);
+//                if(htga_.ChkConnect()){
+//
+//                    htga_.execute(weatherURL);
 
-                    htga_.execute(weatherURL);
-
-                }
+//                }
 
 
 //            String queryString = "?city=130010"; //東京

@@ -1,6 +1,10 @@
 package kotokotobokan.java_conf.gr.jp.signalrtest;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
@@ -42,7 +46,7 @@ public class ServiceTest extends Service {
         super.onStartCommand(intent,flags,startId);
 
 
-        this.ConctOn();
+       // this.ConctOn();
 
 //        if(timer==null) {
 //            timer = new Timer();
@@ -89,6 +93,7 @@ public class ServiceTest extends Service {
                     intent.putExtra("user", user);
                     intent.putExtra("user", message);
                     sendBroadcast(intent);
+                    sendNotification(message);
 
 
                 }, String.class,String.class);
@@ -123,7 +128,29 @@ public class ServiceTest extends Service {
         }
     }
 
+    private void sendNotification(String message_) {
+        final Notification.Builder builder_=new Notification.Builder(getApplicationContext())
+                .setTicker("表示されない")
+                .setDefaults(Notification.DEFAULT_VIBRATE | Notification.DEFAULT_SOUND)
+                .setAutoCancel(true)
+                .setSmallIcon(R.drawable.ic_launcher_background)
+                .setContentTitle("Title_Test")
+                .setContentText(message_);
 
+        Intent i = new Intent(getApplicationContext(), MainActivity.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        i.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        PendingIntent pi = PendingIntent.getActivity(this, 0, i, 0);
+
+        builder_.setContentIntent(pi);
+
+        long[] vibrate_ptn = {0, 100, 300, 1000}; // 独自バイブレーションパターン
+
+        // NotificationManagerのインスタンス取得
+        NotificationManager nm =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        nm.notify(1, builder_.build()); // 設定したNotificationを通知する
+    }
 
 
 
@@ -145,7 +172,28 @@ public class ServiceTest extends Service {
                 hubConnection.send("SendMessage", "abc",st_);
             }
         }
+        public void NtfSend(String st_){
 
+            final Notification.Builder builder_=new Notification.Builder(getApplicationContext())
+                    .setTicker("表示されない")
+                    .setDefaults(Notification.DEFAULT_VIBRATE | Notification.DEFAULT_SOUND)
+                    .setAutoCancel(true)
+                    .setSmallIcon(R.drawable.ic_launcher_background)
+                    .setContentTitle("Title_Test")
+                    .setContentText(st_);
+
+            Intent i = new Intent(getApplicationContext(), MainActivity.class);
+            PendingIntent pi = PendingIntent.getActivity(getApplicationContext(), 0, i, 0);
+
+            builder_.setContentIntent(pi);
+
+            long[] vibrate_ptn = {0, 100, 300, 1000}; // 独自バイブレーションパターン
+
+            // NotificationManagerのインスタンス取得
+            NotificationManager nm =
+                    (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            nm.notify(1, builder_.build()); // 設定したNotificationを通知する
+        }
 
     }
 
