@@ -35,24 +35,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     MyConnection connection_;
     Myreceiver receiver_;
-    ServiceTest.RBinder binder_;
+//    ServiceTest.RBinder binder_;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
+//
+//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+//            }
+//        });
 
         btn1_=findViewById(R.id.button);
         btn1_.setOnClickListener(this);
@@ -66,7 +66,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         txt2_=findViewById(R.id.editText2);
         txt3_=findViewById(R.id.editText3);
         txt4_=findViewById(R.id.editText4);
-        sgr_=new SignalR_A(this);
+
+//        sgr_=new SignalR_A(this);
 
         Log.d("xxx","xxx:MainActivity_onCreate ");
     }
@@ -85,8 +86,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     protected void onDestroy() {
-        Intent intent=new Intent(this,ServiceTest.class);
-        this.stopService(intent);
+//        Intent intent=new Intent(this,ServiceTest.class);
+//        this.stopService(intent);
         super.onDestroy();
 
         Log.d("xxx","xxx:MainActivity_onDestroy() ");
@@ -107,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+//        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
@@ -127,15 +128,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
+    public void StopService(){
+        Intent intent=new Intent(this,ServiceTest.class);
+        this.stopService(intent);
+
+    }
+
+
     public void StartService(){
 
-        connection_=new MyConnection();
+
         Intent intent=new Intent(this,ServiceTest.class);
         this.startService(intent);
-        receiver_=new Myreceiver();
-        IntentFilter filter=new IntentFilter(ServiceTest.SERVICE_ACTION);
-        this.registerReceiver(receiver_,filter);
-        this.bindService(intent,connection_,Context.BIND_AUTO_CREATE);
+//        connection_=new MyConnection();
+//        receiver_=new Myreceiver();
+//        IntentFilter filter=new IntentFilter(ServiceTest.SERVICE_ACTION);
+//        this.registerReceiver(receiver_,filter);
+//        this.bindService(intent,connection_,Context.BIND_AUTO_CREATE);
         Log.d("xxx","xxx:MainActivity_StartService");
 
     }
@@ -147,22 +156,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             case R.id.button:{
                 this.StartService();
-//                sgr_.ConctOn();
+//                sgr_.ConectOn();
                 break;
             }
             case R.id.button2:{
 
-                if(binder_!=null){
+                this.StopService();;
+//                if(binder_!=null){
 //                    binder_.initilal(1);
-                    binder_.MsgSend("ABC_TEST");
-                }
+//                    binder_.MsgSend("ABC_TEST");
+//                }
 
 //                sgr_.MsgSend("TestMsg:"+txt2_.getText().toString());
                 break;
             }
             case R.id.button3:{
 
-                binder_.NtfSend("ABCTEST");
+//                binder_.NtfSend("ABCTEST");
                 //④GET リクエストサンプルとして「Livedoor天気情報」にアクセス
 //                String weatherURL = "192.168.11.10";
 //                String weatherURL = "127.0.0.1";
@@ -201,14 +211,14 @@ class MyConnection implements ServiceConnection{
     @Override
     public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
 
-        binder_=(ServiceTest.RBinder) iBinder;
+//        binder_=(ServiceTest.RBinder) iBinder;
 
     }
 
     @Override
     public void onServiceDisconnected(ComponentName componentName) {
 
-        binder_=null;
+//        binder_=null;
 
     }
 }
@@ -217,10 +227,10 @@ class Myreceiver extends BroadcastReceiver{
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        int counter=intent.getIntExtra("counter",0);
-        MainActivity act_=(MainActivity)context;
-        act_.txt4_.setText("counter:"+ counter);
-        Toast.makeText(act_,"タイマー:"+counter ,Toast.LENGTH_SHORT).show();
+//        int counter=intent.getIntExtra("counter",0);
+//        MainActivity act_=(MainActivity)context;
+//        act_.txt4_.setText("counter:"+ counter);
+//        Toast.makeText(act_,"タイマー:"+counter ,Toast.LENGTH_SHORT).show();
 
     }
 }

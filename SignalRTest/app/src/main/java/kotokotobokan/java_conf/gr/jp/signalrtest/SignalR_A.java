@@ -45,7 +45,7 @@ public  static String SGR_URL="http://192.168.11.2:5001/chatHub";
 
 
                 Log.d("xxx","xxx:ConctOn_2");
-                act_.txt1_.setText("ConctOn!");
+                act_.txt1_.setText("ConectOn!");
             }catch (Error e){
                 Log.d("xxx","xxx:ConctOn_Err"+e.toString());
                 act_.txt1_.setText(e.toString());
